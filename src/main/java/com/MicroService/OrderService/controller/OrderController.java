@@ -2,6 +2,7 @@ package com.MicroService.OrderService.controller;
 
 import com.MicroService.OrderService.dto.OrderRequestDto;
 import com.MicroService.OrderService.service.OrderCreationService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,13 +18,15 @@ public class OrderController {
         this.orderCreationService = orderCreationService;
     }
 
-    // This is the API endpoint you hit from Postman
     @PostMapping("/create")
-    public String createOrder(@RequestBody OrderRequestDto orderRequest) {
-        return orderCreationService.placeOrder(
-                orderRequest.getProductId(),
-                orderRequest.getQuantity()
-        );
+    public ResponseEntity<String> createOrder(
+            @RequestBody OrderRequestDto request) {
+
+        orderCreationService.placeOrder(request);
+
+        return ResponseEntity
+                .ok("Order received and processing started");
     }
 }
+
 
