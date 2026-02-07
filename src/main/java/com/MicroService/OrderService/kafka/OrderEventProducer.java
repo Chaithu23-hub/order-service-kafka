@@ -21,4 +21,5 @@ public class OrderEventProducer {
     public void publishOrderFailed(String orderId, String productId, int qty) {
         kafkaTemplate.send("order-events", new OrderEvent(orderId, productId, qty, OrderStatus.FAILED));
     }
+    //changes
 }
